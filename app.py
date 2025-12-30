@@ -470,25 +470,25 @@ with tab7:
     )
 
     st.write(
-        'Model Features:'
+        'Model Features:\n'
         'The model uses a combination of numerical and one-hot encoded categorical features:'
         '''
-        -Market indicators: Index_Change_Percent, Trading_Volume
-        -Sentiment: Sentiment_Numeric
-        -Sector indicators: one-hot encoded sector variables (e.g., Technology, Healthcare)
-        -Market events: (e.g., IPO launches, bond market fluctuations)
+-Market indicators: Index_Change_Percent, Trading_Volume
+-Sentiment: Sentiment_Numeric
+-Sector indicators: one-hot encoded sector variables (e.g., Technology, Healthcare)
+-Market events: (e.g., IPO launches, bond market fluctuations)
         '''
     )  
 
     st.write(
-        'How the Decision Tree Works'
+        'How the Decision Tree Works\n'
         'Each internal node represents a split on a feature chosen to maximise class separation, using Gini impurity. The tree'
         'recursively partitions the data until stopping conditions are met. Leaf nodes represent the predicted impact level'
         '(Low, Medium, or High) for observations reaching that node.'
     )
 
     st.write(
-        'Interpreting the Tree'
+        'Interpreting the Tree\n'
         'The root node corresponds to the feature providing the largest reduction in impurity and is therefore the most influential'
         'feature in the model. Paths from the root to a leaf represent a sequence of decision rules leading to a predicted impact'
         'level. Node colours indicate the class distribution at each node, with darker colours reflecting higher class purity.'
@@ -529,7 +529,7 @@ with tab7:
     )
 
     st.write(
-        'Model Performance Summary'
+        'Model Performance Summary\n'
         'The decision tree model shows limited ability to predict whether news events are of low, medium, or high impact. Efforts'
         'to improve performance such as using only the most influential features or training a random forest model yielded minimal'
         'improvement. This suggests that the current set of features does not provide enough information to reliably distinguish'
