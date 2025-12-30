@@ -16,7 +16,6 @@ st.set_page_config(layout='wide')
 st.title('Financial News Dashboard', width='stretch')
 st.divider()
 st.header('Analyse the Effects of Financial News on Markets', width='stretch')
-st.text('Financial news has a significant effect on markets globally')
 st.text('In the following analysis we look at the effects of financial news headlines on markets')
 st.text('The aim of the analysis is to uncover market trends which could serve traders who wish factor in the impact of news events on market performance and trading patterns')
 #expander keeps key information above the fold
@@ -103,9 +102,16 @@ import seaborn as sns
 
 with tab2:
     #contains distributions of key features within the dataset as histograms and bar charts
-    st.write('These charts provide an overview of the distribution of key features in the dataset, including news sentiment, '
-             'trading activity, market movements, and event impact. By visualising these distributions, we can better understand'
-            'the patterns and tendencies present in the data.')
+    st.write('**How are key news and market features distributed over time?**')
+    st.write(
+        'This section explores how news sentiment, trading activity, market movements, and event impact are distributed within'
+        'the dataset. These distributions provide context on what types of events are most common and how market responses are'
+        'typically spread.'
+    )
+    st.write(
+        '**Note:** The visualisations in this tab reflect the currently selected date range. Adjusting the date filter may change'
+          'the shape of these distributions, highlighting how news and market behaviour vary across different periods.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.countplot(x='Sentiment', data=df_filtered, palette='Set2', edgecolor='black', linewidth=2, ax=ax)
@@ -115,8 +121,10 @@ with tab2:
     ax.grid(True, axis='y')
     st.pyplot(fig)
     
-    st.write('This chart shows how news article headlines are spread across positive, neutral, '
-             'and negative sentiment categories.')
+    st.write(
+        'This chart shows how news headlines are distributed across positive, neutral, and negative sentiment categories within'
+        'the selected time period. A skew toward a particular sentiment may indicate prevailing market narratives during that period.'
+    )
    
 
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -127,8 +135,11 @@ with tab2:
     ax.grid(True, axis='y')
     st.pyplot(fig)
     
-    st.write('The histogram illustrates how often different trading volume ranges occur,' 
-             ' highlighting common trading activity levels.')
+    st.write(
+        'The histogram illustrates how often different trading volume ranges occur. Concentration around certain values may indicate common'
+        'trading levels while long tails could indicate unusual trading activity.'
+        
+    )
 
 
     fig, ax = plt.subplots(figsize=(12,6))
@@ -139,8 +150,10 @@ with tab2:
     ax.grid(True, axis='y')
     st.pyplot(fig)
     
-    st.write('This histogram displays how frequently different percentage changes in the index occur, '
-             'showing the spread of market movements.')
+    st.write(
+        'This chart displays the distribution of market returns following news events. The shape of the distribution provides'
+        'insight into the frequency and magnitude of positive and negative market movements.'
+    )
 
 
     fig, ax = plt.subplots(figsize=(12,6))
@@ -151,13 +164,25 @@ with tab2:
     ax.grid(True, axis='y')
     st.pyplot(fig)                    
     
-    st.write('The chart shows the frequency of events categorized by their market impact: low, medium, or high.')
+    st.write(
+        'This chart shows how event impact scores are distributed across news events. A concentration of low or high impact values'
+        'can suggest whether most news events tend to have limited or substantial market influence.'
+    )
 
 with tab3:
     # seaborn count plots showing the distribution of sectors affected by news events, top 10 news souces, and top 10 news event types
-    st.write('This tab provides insights into the distribution of news events across sectors, sources, and event types. '
-             'By examining these distributions, we can identify which areas of the market and which information channels'
-              'are most frequently associated with reported events.')
+    st.write('**Which sectors, sources, and event types are most commonly associated with financial news events?**')
+
+    st.write(
+        'This section examines how news events are distributed across market sectors, news sources, and event types. These'
+        'categorical breakdowns help identify which areas of the market and which information channels appear most frequently'
+        'in reported financial events.'
+    )
+
+    st.write(
+        '**Note:** The visualisations in this tab reflect the currently selected date range. Adjusting the date filter may change'
+          'the shape of these distributions, highlighting how news and market behaviour vary across different periods.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.countplot(x='Sector', data=df_filtered, palette='Set2', edgecolor='black', linewidth=2, ax=ax)
@@ -168,8 +193,11 @@ with tab3:
     plt.xticks(rotation=90)
     st.pyplot(fig)
 
-    st.write('This chart shows how news events are distributed across different market sectors, highlighting which sectors '
-             'are most frequently impacted.')
+    st.write(
+        'This chart shows the distribution of news events across different market sectors within the selected time period.'
+        'Higher counts indicate sectors that are more frequently referenced in news coverage, which may reflect periods of'
+        'heightened attention or activity.'
+    )
 
     top_10_sources = df['Source'].value_counts().head(10).index
     fig, ax = plt.subplots(figsize=(12,6))
@@ -181,7 +209,10 @@ with tab3:
     plt.xticks(rotation=90)
     st.pyplot(fig)
 
-    st.write('Here we examine the top 10 sources of news in the dataset, showing which outlets contribute most to market-related reporting.')
+    st.write(
+        'This chart shows the distribution of news events by source. Differences in frequency may indicate which information'
+        'channels are most active or prominent in reporting financial events during the selected period.'
+    )
 
     top_10_market_events = df['Market_Event'].value_counts().head(10).index
     fig, ax = plt.subplots(figsize=(12,6))
@@ -194,15 +225,25 @@ with tab3:
     st.pyplot(fig)
 
     st.write('This chart displays the most common types of market events reported in the dataset, helping to understand which'
-              'events dominate the news landscape.')
+            'events dominate the news landscape.')
 
 import seaborn as sns
 
 with tab4:
     #seaborn boxplots exploring how index percent chane and trading volume are affected by various factors
-    st.write('This tab explores how market outcomes, specifically index percent changes and trading volumes, vary according to different'
-              'factors such as impact level, news sentiment, and sector. The boxplots allow us to observe the distributions,'
-                'spread, and potential outliers across these categories, providing insight into how market reactions differ by context.')
+    st.write('**How do market returns and trading activity differ across news-related categories?**')
+
+    st.write(
+        'This section examines how market outcomes, specifically index percentage changes and trading volumes vary across different'
+        'contextual factors such as event impact level, news sentiment, and market sector. Boxplots are used to compare distributions,'
+        'spreads, and outliers, allowing assessment of whether certain categories are associated with systematically different market'
+        'behaviour.'
+    )
+
+    st.write(
+        '**Note:** The visualisations in this tab reflect the currently selected date range. Adjusting the date filter may change'
+          'the shape of these distributions, highlighting how news and market behaviour vary across different periods.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.boxplot(x='Impact_Level', y='Index_Change_Percent', data=df_filtered, ax=ax, palette='Set2', linewidth=2)
@@ -212,8 +253,11 @@ with tab4:
     ax.grid(True, axis='y')
     st.pyplot(fig)
 
-    st.write('This chart shows how the percentage change in the index varies across low, medium, and high impact events. '
-             'It highlights whether events categorized as higher impact correspond to larger market movements.')
+    st.write(
+        'This chart compares the distribution of index percentage changes across low, medium, and high impact events within the'
+        'selected time period. Differences in medians, spreads, or outliers may suggest variation in market responses across'
+        'impact levels.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.boxplot(x='Sentiment', y='Index_Change_Percent', data=df_filtered, ax=ax, palette='Set3', linewidth=2)
@@ -223,8 +267,10 @@ with tab4:
     ax.grid(True, axis='y')
     st.pyplot(fig)
 
-    st.write('Here, we examine how positive, neutral, and negative news sentiment relates to changes in the index, '
-             'helping to identify patterns between sentiment and market performance.')
+    st.write(
+        'This chart compares index percentage changes across positive, neutral, and negative sentiment categories. Overlap between'
+        'distributions indicates uncertainty, while shifts in medians may suggest sentiment-related differences in market response.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.boxplot(x='Sector', y='Index_Change_Percent', data=df_filtered, ax=ax, palette='pastel', linewidth=2)
@@ -236,7 +282,7 @@ with tab4:
     st.pyplot(fig)
 
     st.write('This chart displays index changes for events affecting different sectors, revealing which sectors experience '
-             'greater volatility or larger shifts in response to news.')
+             'greater volatility or larger shifts in response to news during the selected period.')
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.boxplot(x='Impact_Level', y='Trading_Volume', data=df_filtered, ax=ax, palette='Set2', linewidth=2)
@@ -246,8 +292,10 @@ with tab4:
     ax.grid(True, axis='y')
     st.pyplot(fig)
 
-    st.write('This chart illustrates how trading volumes vary depending on the impact level of events, showing whether'
-              'high-impact events tend to drive higher market activity.')
+    st.write(
+        'This chart shows how trading volume varies across impact levels. Wider spreads or higher medians may suggest increased'
+        'market activity following higher-impact events.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.boxplot(x='Sentiment', y='Trading_Volume', data=df_filtered, ax=ax, palette='Set3', linewidth=2)
@@ -257,8 +305,10 @@ with tab4:
     ax.grid(True, axis='y')
     st.pyplot(fig)
 
-    st.write('Here, trading volume is compared across sentiment categories, providing insight into whether market activity'
-              'is influenced more by positive, neutral, or negative news.')
+    st.write(
+        'This chart displays trading volume distributions across sentiment categories. Differences in spread or central tendency'
+        'may reflect varying levels of market engagement.'
+    )
 
     fig, ax = plt.subplots(figsize=(12,6))
     sns.boxplot(x='Sector', y='Trading_Volume', data=df_filtered, ax=ax, palette='pastel', linewidth=2)
@@ -269,22 +319,29 @@ with tab4:
     plt.xticks(rotation=90)
     st.pyplot(fig)
 
-    st.write('This chart shows trading volume distributions for events across sectors, helping to identify which sectors'
-              'experience more active trading in response to news.')
+    st.write(
+        'This chart shows how trading volume varies across sectors. Outliers and dispersion provide insight into sector-specific'
+        'responses to news.'
+    )
 
 with tab5:
     #seaborn heatmap which explores correlations between key features, encoding was done in jupyter and heatmap_df was exported
-    st.write('This heatmap visualizes the correlations between trading sentiment, trading volume, index change percent, '
-             'and impact level. ')
+    st.write('**How are key numerical features related across the full dataset?**')
+    st.write(
+        'This heatmap visualizes the correlations between trading sentiment, trading volume, index change percent and impact level.'
+        'Correlations are computed across the entire dataset to highlight overall linear relationships that persist beyond specific'
+        'time windows.'
+    )
     
     fig, ax = plt.subplots(figsize=(10,6))
     sns.heatmap(heatmap_df.corr(), annot=True, cmap='RdBu_r', center=0)
     ax.set_title("Correlation Heatmap of Key Financial Features")
     st.pyplot(fig)
 
-    st.write('While some patterns can be observed, the relationships are generally weak. The strongest '
-             'correlation is only 0.037, found between sentiment and trading volume, suggesting that sentiment in headlines'
-              'does not strongly align with trading behavior in this dataset.')
+    st.write(
+        'The relationships in the heatmap are generally weak. The strongest correlation is only 0.037, found between sentiment and'
+        'trading volume, suggesting that sentiment in headlines does not strongly align with trading behavior in this dataset.'
+    )
 
 with tab6:
         #most common word, bigrams, and trigrams are plotted using seaborn barplots, tokenisation, removal of punctuation and 
@@ -293,8 +350,8 @@ with tab6:
         from nltk import bigrams, trigrams, FreqDist
 
         st.write('To better understand the language patterns within the headlines, we examined the frequency of individual'
-                  'words as well as common word pairings (bigrams) and triplets (trigrams). This analysis highlights recurring' 
-                  ' themes and keywords that may reveal the focus or tone of the dataset.')
+                'words as well as common word pairings (bigrams) and triplets (trigrams). This analysis highlights recurring' 
+                ' themes and keywords that may reveal the focus or tone of the dataset.')
 
         #get count of each unique word in word_series, select top 20 words, and 2 new columns for the df
         most_common_words = word_series.value_counts().head(20).reset_index()
@@ -310,8 +367,10 @@ with tab6:
         plt.xticks(rotation=90)
         st.pyplot(fig)
 
-        st.write('This chart shows the 20 most frequently used words across all headlines. It gives a clear picture of which'
-                'terms dominate the dataset, providing insight into the most emphasised topics or framing.')
+        st.write(
+            'This chart shows the 20 most frequently used words across all headlines. It gives a clear picture of which terms'
+            'dominate the dataset, providing insight into the most emphasised topics or framing.'
+        )
 
         #create lists of bigrams and tridgrams from clean_words
         bigrams_list = list(bigrams(clean_words))
@@ -342,8 +401,10 @@ with tab6:
         plt.xticks(rotation=90)
         st.pyplot(fig)
 
-        st.write('Here we look at the most common two-word combinations found in the headlines. These bigrams often highlight' 
-           'relationships between concepts or recurring phrases, offering more context than single words alone.')
+        st.write(
+            'Here we look at the most common two-word combinations found in the headlines. These bigrams often highlight relationships'
+            'between concepts or recurring phrases, offering more context than single words alone.'
+        )
 
         fig, ax = plt.subplots(figsize=(12,6))
         sns.barplot(data=df_trigrams.head(10), x='Trigram', y='Count', palette='Set3', edgecolor='black', linewidth=2, ax=ax)
@@ -354,8 +415,8 @@ with tab6:
         plt.xticks(rotation=90)
         st.pyplot(fig)
 
-        st.write('This chart extends the analysis to three-word sequences. Trigrams help capture headline structures and recurring' \
-            ' expressions, giving a deeper view into how ideas are framed or repeated.')
+        st.write('This chart extends the analysis to three-word sequences. Trigrams help capture headline structures and recurring'
+                 'expressions, giving a deeper view into how ideas are framed or repeated.')
 
         #st.subheader('Top 10 Bigrams')
         #st.dataframe(df_bigrams)
@@ -400,25 +461,38 @@ with tab7:
     dtree = DecisionTreeClassifier(max_depth=4)
     dtree = dtree.fit(x_train, y_train)
 
-    st.write('  Introduction to Decison Tree')
-    st.write('We trained a decision tree classifier to predict the impact level of market events'
-      '(Low, Medium, High) based on numeric features like Index_Change_Percent, '
-      'Trading_Volume, sentiment scores, sector indicators, and market event flags.\n')
-    st.write('  Explanation of Features')
-    st.write('The model uses a combination of numeric features and one-hot encoded categorical features:\n'
-      '-Market indicators (Index_Change_Percent, Trading_Volume)\n'
-      '-Sentiment scores (Sentiment_Numeric)\n'
-      '-Sector dummies (Sector_Technology, Sector_Healthcare, etc.)\n'
-      '-Market event flags (Market_Event_Bond Market Fluctuation, Market_Event_IPO Launch, etc.)\n')
-    st.write('  How the Tree Works')
-    st.write('Each node in the tree represents a decision based on a feature threshold.The tree splits'
-      'the data at points that maximise class separation (using Gini impurity or entropy).Leaf'
-      'nodes show the predicted class (Low, Medium, High) and can be interpreted as the model’s'
-      'predicted impact level for the observations that reach that node.\n')
-    st.write('  Interpreting the Tree')
-    st.write('The top node represents the most important feature for predicting impact.Branches split'
-      'based on feature thresholds, and the path from root to leaf indicates the sequence of'
-      'decisions. Node colours indicate class distribution — darker colours represent a stronger class signal.\n \n')
+    st.write('**Can news and market features predict the impact level of financial events?**')
+    
+    st.write(
+        'This section presents a decision tree classifier trained to predict the impact level of market events (Low, Medium, High)'
+        'using numerical market indicators, sentiment measures, and encoded categorical features. The model is trained on the full'
+        'dataset to identify global patterns rather than time-specific effects.'
+    )
+
+    st.write(
+        'Model Features:'
+        'The model uses a combination of numerical and one-hot encoded categorical features:'
+        '''
+        -Market indicators: Index_Change_Percent, Trading_Volume
+        -Sentiment: Sentiment_Numeric
+        -Sector indicators: one-hot encoded sector variables (e.g., Technology, Healthcare)
+        -Market events: (e.g., IPO launches, bond market fluctuations)
+        '''
+    )  
+
+    st.write(
+        'How the Decision Tree Works'
+        'Each internal node represents a split on a feature chosen to maximise class separation, using Gini impurity. The tree'
+        'recursively partitions the data until stopping conditions are met. Leaf nodes represent the predicted impact level'
+        '(Low, Medium, or High) for observations reaching that node.'
+    )
+
+    st.write(
+        'Interpreting the Tree'
+        'The root node corresponds to the feature providing the largest reduction in impurity and is therefore the most influential'
+        'feature in the model. Paths from the root to a leaf represent a sequence of decision rules leading to a predicted impact'
+        'level. Node colours indicate the class distribution at each node, with darker colours reflecting higher class purity.'
+    )
 
     fig, ax = plt.subplots(figsize=(30,25))
     class_mapping = {0: 'Low', 1: 'Medium', 2: 'High'}
@@ -432,7 +506,7 @@ with tab7:
 
     #st.write('Confusion matrix tree: \n', confusion_matrix(y_test, y_test_predict), '\n')
     st.write('Accuracy: ', accuracy_score(y_test ,y_test_predict), '\n')
-    #st.write(metrics.classification_report(y_test, y_test_predict),'\n')
+    st.write(metrics.classification_report(y_test, y_test_predict),'\n')
 
     # Feature importance chart
     importance_df = pd.DataFrame({
@@ -447,6 +521,22 @@ with tab7:
     ax.set_xlabel('Feature')
     plt.xticks(rotation=90, ha='right')
     st.pyplot(fig)
+
+    st.write(
+        'This chart shows the relative importance of the top features used by the decision tree, measured by their contribution to'
+        'impurity reduction. Higher importance values indicate features that play a larger role in the model’s decision-making'
+        'process, though they do not imply causal influence.'
+    )
+
+    st.write(
+        'Model Performance Summary'
+        'The decision tree model shows limited ability to predict whether news events are of low, medium, or high impact. Efforts'
+        'to improve performance such as using only the most influential features or training a random forest model yielded minimal'
+        'improvement. This suggests that the current set of features does not provide enough information to reliably distinguish'
+        'between impact levels. Additional feature engineering, alternative text representations, or time-dependent modelling'
+        'approaches may be needed to better capture the relationship between financial news and market impact.'
+    )
+
 
 
 
