@@ -57,14 +57,14 @@ def render(df_one_hot_encoded):
     )  
 
     st.write(
-        '**How the Decision Tree Works**\n'
+        '**How the Decision Tree Works:**\n'
         'Each internal node represents a split on a feature chosen to maximise class separation, using Gini impurity. The tree'
         'recursively partitions the data until stopping conditions are met. Leaf nodes represent the predicted impact level'
         '(Low, Medium, or High) for observations reaching that node.'
     )
 
     st.write(
-        '**Interpreting the Tree**\n'
+        '**Interpreting the Tree: **\n'
         'The root node corresponds to the feature providing the largest reduction in impurity and is therefore the most influential'
         'feature in the model. Paths from the root to a leaf represent a sequence of decision rules leading to a predicted impact'
         'level. Node colours indicate the class distribution at each node, with darker colours reflecting higher class purity.'
@@ -80,7 +80,7 @@ def render(df_one_hot_encoded):
 
     y_test_predict = dtree.predict(x_test)
 
-    #st.write('Confusion matrix tree: \n', confusion_matrix(y_test, y_test_predict), '\n')
+    st.write('Confusion matrix tree: \n', confusion_matrix(y_test, y_test_predict), '\n')
     st.write('Accuracy: ', accuracy_score(y_test ,y_test_predict), '\n')
     st.write(metrics.classification_report(y_test, y_test_predict),'\n')
 
@@ -101,11 +101,11 @@ def render(df_one_hot_encoded):
     st.write(
         'This chart shows the relative importance of the top features used by the decision tree, measured by their contribution to'
         'impurity reduction. Higher importance values indicate features that play a larger role in the model’s decision-making'
-        'process, though they do not imply causal influence.'
+        'process, though they do not imply causal influence.\n\n'
     )
 
     st.write(
-        '**Model Performance Summary**\n'
+        '**Model Performance Summary: **\n'
         'The decision tree model shows limited ability to predict whether news events are of low, medium, or high impact. Efforts'
         'to improve performance such as using only the most influential features or training a random forest model yielded minimal'
         'improvement. This suggests that the current set of features does not provide enough information to reliably distinguish'
