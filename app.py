@@ -78,7 +78,7 @@ with tab2:
    data_distributions.render(df_filtered)
 
 with tab3:
-    categorical_analysis.render(df_filtered)
+    categorical_analysis.render(df, df_filtered)
     
 with tab4:
     market_movement_analysis.render(df_filtered)
