@@ -46,28 +46,27 @@ def render(df_one_hot_encoded):
     )
 
     st.write(
-        '**Model Features:**'
-        'The model uses a combination of numerical and one-hot encoded categorical features:'
-        '''
--Market indicators: Index_Change_Percent, Trading_Volume
--Sentiment: Sentiment_Numeric
--Sector indicators: one-hot encoded sector variables (e.g., Technology, Healthcare)
--Market events: (e.g., IPO launches, bond market fluctuations)
-        '''
-    )  
+        """
+        **Model Features:**
+        The model uses a combination of numerical and one-hot encoded categorical features:
+        - Market indicators: Index_Change_Percent, Trading_Volume
+        - Sentiment: Sentiment_Numeric
+        - Sector indicators: one-hot encoded sector variables (e.g., Technology, Healthcare)
+        - Market events: (e.g., IPO launches, bond market fluctuations)
+        """
+    )
 
     st.write(
-        '**How the Decision Tree Works:**\n'
+        '**How the Decision Tree Works:**\n\n'
         'Each internal node represents a split on a feature chosen to maximise class separation, using Gini impurity. The tree'
         'recursively partitions the data until stopping conditions are met. Leaf nodes represent the predicted impact level'
         '(Low, Medium, or High) for observations reaching that node.'
     )
 
     st.write(
-        '**Interpreting the Tree: **\n'
-        'The root node corresponds to the feature providing the largest reduction in impurity and is therefore the most influential'
-        'feature in the model. Paths from the root to a leaf represent a sequence of decision rules leading to a predicted impact'
-        'level. Node colours indicate the class distribution at each node, with darker colours reflecting higher class purity.'
+        '**Interpreting the Tree:**\n\n'
+        'The root node corresponds to the feature providing the largest reduction in impurity. '
+        'Node colors indicate the class distribution, with darker colors reflecting higher purity.'
     )
 
     fig, ax = plt.subplots(figsize=(30,25))
@@ -105,10 +104,13 @@ def render(df_one_hot_encoded):
     )
 
     st.write(
-        '**Model Performance Summary: **\n'
-        'The decision tree model shows limited ability to predict whether news events are of low, medium, or high impact. Efforts'
-        'to improve performance such as using only the most influential features or training a random forest model yielded minimal'
-        'improvement. This suggests that the current set of features does not provide enough information to reliably distinguish'
-        'between impact levels. Additional feature engineering, alternative text representations, or time-dependent modelling'
-        'approaches may be needed to better capture the relationship between financial news and market impact.'
+        """
+    **Model Performance Summary:**
+    
+    The decision tree model shows limited ability to predict whether news events are of low, medium, or high impact. 
+    Efforts to improve performance, such as using only the most influential features or training a random forest model yielded minimal improvement. 
+    
+    This suggests that the current set of features does not provide enough information to reliably distinguish between impact levels. 
+    Additional feature engineering, alternative text representations, or time-dependent modelling approaches may be needed to better capture the relationship between financial news and market impact.
+    """
     )
